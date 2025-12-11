@@ -1,0 +1,44 @@
+# 1. Konfigurasi dasar
+set datafile separator ","
+# Tinggi gambar saya ubah jadi 1200 supaya 7 grafik muat dan jelas
+set terminal pngcairo size 1280,1200 enhanced font 'Arial,10'
+set output 'sampel_4_4.png'
+
+# 2. Mulai Mode Multiplot (Layout 4 baris x 2 kolom = 8 slot)
+set multiplot layout 4,2 rowsfirst title "\nGrafik Terpisah Tiap Sensor (Sampel 1.2)" font ",16"
+
+# -- Settingan umum untuk semua grafik kecil --
+set grid
+set xlabel "Timestamp"
+set format x "%.0f"  # Agar angka timestamp tidak jadi notasi ilmiah (1.7e9)
+
+# -- GRAFIK 1: GMXXX NO2 (Kolom 2) --
+set title "GMXXX NO2"
+plot 'sampel 4 4.csv' using 1:2 every ::1 with lines lw 2 lc rgb "red" notitle
+
+# -- GRAFIK 2: GMXXX Ethanol (Kolom 3) --
+set title "GMXXX Ethanol"
+plot 'sampel 4 4.csv' using 1:3 every ::1 with lines lw 2 lc rgb "blue" notitle
+
+# -- GRAFIK 3: GMXXX VOC (Kolom 4) --
+set title "GMXXX VOC"
+plot 'sampel 4 4.csv' using 1:4 every ::1 with lines lw 2 lc rgb "green" notitle
+
+# -- GRAFIK 4: GMXXX CO (Kolom 5) --
+set title "GMXXX CO"
+plot 'sampel 4 4.csv' using 1:5 every ::1 with lines lw 2 lc rgb "magenta" notitle
+
+# -- GRAFIK 5: MiCS5524 CO (Kolom 6) --
+set title "MiCS5524 CO"
+plot 'sampel 4 4.csv' using 1:6 every ::1 with lines lw 2 lc rgb "orange" notitle
+
+# -- GRAFIK 6: MiCS5524 Ethanol (Kolom 7) --
+set title "MiCS5524 Ethanol"
+plot 'sampel 4 4.csv' using 1:7 every ::1 with lines lw 2 lc rgb "cyan" notitle
+
+# -- GRAFIK 7: MiCS5524 VOC (Kolom 8) --
+set title "MiCS5524 VOC"
+plot 'sampel 4 4.csv' using 1:8 every ::1 with lines lw 2 lc rgb "brown" notitle
+
+# 3. Selesai
+unset multiplot
